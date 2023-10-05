@@ -1,7 +1,7 @@
 import pygame
-from classes.roots.move import PlayerMove
-from classes.roots.tank import Tank
-from classes.gun.gun import Gun
+from src.roots.player_move import PlayerMove
+from src.roots.tank import Tank
+from src.gun.gun import Gun
 
 class Player(PlayerMove, Tank):
     def __init__(self, x, y, hp, speed, dict_gun):
@@ -10,11 +10,11 @@ class Player(PlayerMove, Tank):
         self.dict_gun = dict_gun
         self.gun = dict_gun[pygame.K_1]
             
-    def update(self, key, mouse_pos, current_time, scr_width, scr_height):
-        self.move(key, scr_height, scr_width)
-        self.gun.update(self.rect.center ,mouse_pos, current_time)
+    def update(self, key, mouse_pos, scr_width, scr_height, delta):
+        self.move(key, scr_height, scr_width, delta)
+        self.gun.update(self.rect.center ,mouse_pos, delta)
         for bul in self.gun.magazine:
-            bul.update(scr_width, scr_height)
+            bul.update(scr_width, scr_height, delta)
     
     def draw(self, screen, mouse_pos):
         pygame.draw.rect(screen, 'WHITE', self.rect, 0, 10)

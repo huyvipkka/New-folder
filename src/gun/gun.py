@@ -1,7 +1,7 @@
 import pygame
-from classes.gun.magazine import Magazine
-from classes.gun.fire import Fire
-from classes.gun.reload_ammos import Reload
+from src.gun.magazine import Magazine
+from src.gun.fire import Fire
+from src.gun.reload_ammos import Reload
 from pygame.locals import *
 
 class Gun(Magazine, Fire, Reload):
@@ -12,14 +12,14 @@ class Gun(Magazine, Fire, Reload):
         self.name = name
         
         
-    def update(self, player_pos, mouse_pos, current_time):
+    def update(self, player_pos, mouse_pos, delta):
         if pygame.key.get_pressed()[K_r]:
             self.ammos = 0
         if self.ammos <= 0:
             self.reloading = True
-            self.reloadMag(current_time)
+            self.reloadMag(delta)
         else:
-            self.fire(player_pos, mouse_pos, current_time)
+            self.fire(player_pos, mouse_pos, delta)
                 
     
 

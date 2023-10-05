@@ -1,5 +1,5 @@
 import pygame
-from classes.gun.bullet import Bullet
+from src.gun.bullet import Bullet
 
 class Magazine:
     def __init__(self, ammos, damage, color, size, speed):

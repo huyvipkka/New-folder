@@ -11,12 +11,12 @@ class Bullet:
         self.color = color
         self.direction = pygame.Vector2(0, 0)
         
-    def update(self, scr_width, scr_height):
+    def update(self, scr_width, scr_height, delta):
         if self.active:
             if self.direction.length() > 0:
                 self.direction.normalize_ip()
-                self.rect.x += self.direction.x * self.speed
-                self.rect.y += self.direction.y * self.speed
+                self.rect.x += self.direction.x * self.speed * delta
+                self.rect.y += self.direction.y * self.speed * delta
             
             if self.rect.x < 0 or self.rect.x > scr_width or self.rect.y < 0 or self.rect.y > scr_height:
                 self.active = False

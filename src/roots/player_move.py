@@ -5,7 +5,7 @@ class PlayerMove:
     def __init__(self, speed):
         self.speed = speed
                 
-    def move(self, key, SCREEN_WIDTH, SCREEN_HEIGHT):
+    def move(self, key, SCREEN_WIDTH, SCREEN_HEIGHT, delta):
         direction = pygame.math.Vector2(0, 0)
         if key[K_UP] or key[K_w]:
             direction.y -= 1
@@ -18,8 +18,8 @@ class PlayerMove:
         
         if direction.length() > 0:
             direction.normalize_ip()
-        self.rect.centerx += direction.x * self.speed
-        self.rect.centery += direction.y * self.speed
+        self.rect.centerx += direction.x * self.speed * delta
+        self.rect.centery += direction.y * self.speed * delta
         self.not_out_scr(SCREEN_HEIGHT, SCREEN_WIDTH)
         
         
@@ -32,3 +32,4 @@ class PlayerMove:
             self.rect.top = 0
         elif self.rect.left <= 0:
             self.rect.left = 0
+            
